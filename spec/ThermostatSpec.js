@@ -96,3 +96,30 @@ describe('Power save mode off', function(){
   });
 
 });
+
+describe('display power usage levels', function() {
+  describe('when the temp is below 18 degs', function() {
+    it('it is considered low-usage', function() {
+    for (var i = 0; i < 3; i++) {
+      thermostat.decreseTemp();
+    }
+    expect(thermostat.energyUsage()).toEqual('low-usage');
+    });
+  });
+
+  describe('when the temp is between 18 and 25 degs', function () {
+    it('it is condisdered medium-usage', function() {
+      expect(thermostat.energyUsage()).toEqual('medium-usage');
+    });
+  });
+
+  describe('when the temp is something else', function () {
+    it('it is considered high-usage', function() {
+      thermostat.powerSave = false;
+      for (var i = 0; i < 6; i++) {
+        thermostat.increaseTemp();
+      }
+      expect(thermostat.energyUsage()).toEqual('high-usage');
+    });
+  });
+});
