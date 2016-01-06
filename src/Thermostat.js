@@ -5,9 +5,12 @@
 function Thermostat() {
   this.temp = DEFAULT_TEMP;
   this.MIN_TEMP = 10;
+  this.powerSave = true;
+  this.maxTemp = 25;
 }
 
 const DEFAULT_TEMP = 20;
+
 
 Thermostat.prototype.getTemp = function() {
   return this.temp;
@@ -26,4 +29,13 @@ Thermostat.prototype.decreseTemp = function(){
     return;
   }
   this.temp -= 1;
+};
+
+Thermostat.prototype.isPowerSaveOn = function() {
+  return this.powerSave === true;
+};
+
+Thermostat.prototype.turnPowerSaveOff = function () {
+  this.powerSave = false;
+  this.maxTemp = 32;
 };

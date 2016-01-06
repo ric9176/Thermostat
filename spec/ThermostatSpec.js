@@ -32,5 +32,23 @@ it('min temp cannot be below 10', function(){
   for(var i = 0; i < 11; i ++){
     thermostat.decreseTemp();
   }
-  expect(thermostat.getTemp()).toEqual(10)
+  expect(thermostat.getTemp()).toEqual(10);
+});
+
+it('has power save mode on by default', function() {
+  expect(thermostat.isPowerSaveOn()).toBe(true);
+});
+
+it('can turn power save mode off', function() {
+  thermostat.turnPowerSaveOff();
+  expect(thermostat.isPowerSaveOn()).toBe(false);
+});
+
+it('when power save mode is on, max temp is 25', function() {
+  expect(thermostat.maxTemp).toEqual(25);
+});
+
+it('when power save mode is off, max temp is 32', function() {
+  thermostat.turnPowerSaveOff();
+  expect(thermostat.maxTemp).toEqual(32);
 });
