@@ -44,11 +44,55 @@ it('can turn power save mode off', function() {
   expect(thermostat.isPowerSaveOn()).toBe(false);
 });
 
-it('when power save mode is on, max temp is 25', function() {
-  expect(thermostat.maxTemp).toEqual(25);
+it('can turn power save mode back on', function() {
+  thermostat.turnPowerSaveOff();
+  expect(thermostat.isPowerSaveOn()).toBe(false);
+  thermostat.turnPowerSaveOn();
+  expect(thermostat.isPowerSaveOn()).toBe(true);
 });
+
 
 it('when power save mode is off, max temp is 32', function() {
   thermostat.turnPowerSaveOff();
   expect(thermostat.maxTemp).toEqual(32);
+});
+
+it('reset button returns temp to 20', function(){
+  thermostat.increaseTemp();
+  thermostat.reset();
+  expect(thermostat.temp).toEqual(DEFAULT_TEMP);
+});
+
+describe('Power save mode on', function(){
+
+  it('when power save mode is on, max temp is 25', function() {
+    expect(thermostat.maxTemp_PSM_ON).toEqual(25);
+  });
+
+  it('cannot go above 25', function(){
+    for(var i = 0; i < 6 ; i ++){
+      thermostat.increaseTemp();
+    }
+    expect(thermostat.getTemp()).toEqual(25);
+  });
+
+});
+
+describe('Power save mode off', function(){
+
+  beforeEach(function(){
+      thermostat.turnPowerSaveOff();
+    });
+
+  it('when power save mode is on, max temp is 32', function() {
+    expect(thermostat.maxTemp_PSM_OFF).toEqual(32);
+  });
+
+  it('cannot go above 32', function(){
+    for(var i = 0; i < 13 ; i ++){
+      thermostat.increaseTemp();
+    }
+    expect(thermostat.getTemp()).toEqual(32);
+  });
+
 });
