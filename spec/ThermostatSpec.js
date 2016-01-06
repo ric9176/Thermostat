@@ -39,23 +39,9 @@ it('has power save mode on by default', function() {
   expect(thermostat.isPowerSaveOn()).toBe(true);
 });
 
-it('can turn power save mode off', function() {
-  thermostat.turnPowerSaveOff();
-  expect(thermostat.isPowerSaveOn()).toBe(false);
-});
-
-it('can turn power save mode back on', function() {
-  thermostat.turnPowerSaveOff();
-  expect(thermostat.isPowerSaveOn()).toBe(false);
-  thermostat.turnPowerSaveOn();
-  expect(thermostat.isPowerSaveOn()).toBe(true);
-});
 
 
-it('when power save mode is off, max temp is 32', function() {
-  thermostat.turnPowerSaveOff();
-  expect(thermostat.maxTemp).toEqual(32);
-});
+
 
 it('reset button returns temp to 20', function(){
   thermostat.increaseTemp();
@@ -67,6 +53,11 @@ describe('Power save mode on', function(){
 
   it('when power save mode is on, max temp is 25', function() {
     expect(thermostat.maxTemp_PSM_ON).toEqual(25);
+  });
+
+  it('can turn power save mode off', function() {
+    thermostat.turnPowerSaveOff();
+    expect(thermostat.isPowerSaveOn()).toBe(false);
   });
 
   it('cannot go above 25', function(){
@@ -88,11 +79,48 @@ describe('Power save mode off', function(){
     expect(thermostat.maxTemp_PSM_OFF).toEqual(32);
   });
 
+  it('when power save mode is off, max temp is 32', function() {
+    thermostat.turnPowerSaveOff();
+    expect(thermostat.maxTemp).toEqual(32);
+  });
+
+  it('can turn power save mode back on', function() {
+    expect(thermostat.isPowerSaveOn()).toBe(false);
+    thermostat.turnPowerSaveOn();
+    expect(thermostat.isPowerSaveOn()).toBe(true);
+  });
+
   it('cannot go above 32', function(){
     for(var i = 0; i < 13 ; i ++){
       thermostat.increaseTemp();
     }
     expect(thermostat.getTemp()).toEqual(32);
   });
+});
 
+describe('display usage levels', function(){
+  describe('when temp is < 18', function(){
+    it('display colour is green', function(){
+      for(var i = 0; i < 3; i ++){
+        thermostat.decreseTemp();
+      }
+      expect(thermostat.energyUsage()).toEqual('green');
+    });
+  });
+
+  describe('when temp is between 18 and 25', function(){
+    it('display colour is yellow', function(){
+      expect(thermostat.energyUsage()).toEqual('yellow');
+    });
+  });
+
+  describe('when the temp is anything else', function(){
+    it('display colour is red', function(){
+      thermostat.powerSave = false;
+      for(var i = 0; i < 6; i++){
+        thermostat.increaseTemp();
+      }
+      expect(thermostat.energyUsage()).toEqual('red');
+    });
+  });
 });
