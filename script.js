@@ -42,4 +42,8 @@ $(document).ready(function() {
     $('#temp').text(thermostat.temp);
     $('h1').attr('class', thermostat.energyUsage());
   }
+
+  $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/IT/Rome.json').done(function(json) {
+    $('#api').text(json.current_observation.temp_c);
+  });
 });
