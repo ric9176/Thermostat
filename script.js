@@ -43,7 +43,7 @@ $(document).ready(function() {
     $('h1').attr('class', thermostat.energyUsage());
   }
 
-  $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/IT/Rome.json').done(function(json) {
+  $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/UK/London.json').done(function(json) {
     $('#api').text(json.current_observation.temp_c);
   });
 });
