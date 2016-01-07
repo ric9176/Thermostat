@@ -1,27 +1,27 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
   refreshPowerStatus();
-  $('#temp').text(thermostat.temp);
+  refreshTemp();
 
   $('#temp-up').click(function() {
     thermostat.increaseTemp();
-    $('#temp').text(thermostat.temp);
+    refreshTemp();
   });
 
   $('#temp-down').click(function() {
     thermostat.decreseTemp();
-    $('#temp').text(thermostat.temp);
+    refreshTemp();
   });
 
   $('#temp-reset').click(function() {
     thermostat.reset();
-    $('#temp').text(thermostat.temp);
+    refreshTemp();
   });
 
   $('#PSM-on').click(function() {
     thermostat.turnPowerSaveOn();
     refreshPowerStatus();
-    $('#temp').text(thermostat.temp);
+    refreshTemp();
   });
 
   $('#PSM-off').click(function() {
@@ -37,8 +37,8 @@ $(document).ready(function() {
     }
   }
 
-  // function refreshTemp() {
-  //   $('#temp').text(thermostat.temp);
-  //   $('h1').attr('class', thermostat.energyUsage());
-  // }
+  function refreshTemp() {
+    $('#temp').text(thermostat.temp);
+    $('h1').attr('class', thermostat.energyUsage());
+  }
 });
