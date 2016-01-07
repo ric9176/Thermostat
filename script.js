@@ -21,20 +21,24 @@ $(document).ready(function() {
   $('#PSM-on').click(function() {
     thermostat.turnPowerSaveOn();
     refreshPowerStatus();
+    $('#temp').text(thermostat.temp);
   });
 
   $('#PSM-off').click(function() {
-
     thermostat.turnPowerSaveOff();
     refreshPowerStatus();
   });
 
-function refreshPowerStatus() {
-  if(thermostat.isPowerSaveOn()){
-    $('#power-saving-status').text('on');
-  } else {
-    $('#power-saving-status').text('off');
+  function refreshPowerStatus() {
+    if(thermostat.isPowerSaveOn()){
+      $('#power-saving-status').text('on');
+    } else {
+      $('#power-saving-status').text('off');
+    }
   }
-}
 
+  // function refreshTemp() {
+  //   $('#temp').text(thermostat.temp);
+  //   $('h1').attr('class', thermostat.energyUsage());
+  // }
 });

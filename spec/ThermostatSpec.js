@@ -63,6 +63,15 @@ it('reset button returns temp to 20', function(){
   expect(thermostat.temp).toEqual(DEFAULT_TEMP);
 });
 
+describe('Edge case for max temp', function() {
+  it ('if current temp > 25, power save sets it to 25', function(){
+          thermostat.turnPowerSaveOff();
+          for(i = 0; i < 9; i++) { thermostat.increaseTemp(); }
+          thermostat.turnPowerSaveOn();
+          expect(thermostat.temp).toEqual(25);
+  });
+});
+
 describe('Power save mode on', function(){
 
   it('when power save mode is on, max temp is 25', function() {

@@ -49,12 +49,13 @@ Thermostat.prototype.isPowerSaveOn = function() {
 
 Thermostat.prototype.turnPowerSaveOff = function () {
   this.powerSave = false;
-  this.maxTemp = 32;
+  this.maxTemp = this.maxTemp_PSM_OFF;
 };
 
 Thermostat.prototype.turnPowerSaveOn = function () {
   this.powerSave = true;
-  this.maxTemp = 25;
+  this.maxTemp = this.maxTemp_PSM_ON;
+  this.temp = this.maxTemp;
 };
 
 Thermostat.prototype.reset = function() {
