@@ -27,6 +27,7 @@ $(document).ready(function() {
   $('#PSM-off').click(function() {
     thermostat.turnPowerSaveOff();
     refreshPowerStatus();
+    refreshTemp();
   });
 
   function refreshPowerStatus() {
