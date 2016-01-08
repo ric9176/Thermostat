@@ -43,7 +43,32 @@ $(document).ready(function() {
     $('h1').attr('class', thermostat.energyUsage());
   }
 
-  $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/UK/London.json').done(function(json) {
-    $('#api').text(json.current_observation.temp_c);
-  });
+  function updateWeather() {
+
+
+      $('#current-country').change(function() {
+      var country = $('#current-country').val();
+
+      });
+
+      $('#select-city').change(function() {
+        var city = $('#current-city').val();
+      });
+
+    displayWeather(country, city);
+  }
+
+    displayWeather('UK', 'London');
+
+
+
+    function displayWeather(country, city) {
+    $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/'+ country +'/'+ city +'.json').done
+      (function(json) {
+        $('#api').text(json.current_observation.temp_c);
+      });
+  }
+
+
+
 });
