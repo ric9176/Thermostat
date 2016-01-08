@@ -43,8 +43,7 @@ $(document).ready(function() {
     $('h1').attr('class', thermostat.energyUsage());
   }
 
-  var city = $('#current-city').val();
-  var country = $('#current-country').val();
+
 
   function updateWeather() {
 

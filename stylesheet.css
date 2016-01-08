@@ -1,11 +1,18 @@
-.low-usage{
+
+
+
+body {
+  text-align: center;
+}
+
+.jumbotron .low-usage{
   color: green;
 }
 
-.medium-usage{
+.jumbotron .medium-usage{
   color: orange;
 }
 
-.high-usage{
+.jumbotron .high-usage{
   color: red;
 }
