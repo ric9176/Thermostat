@@ -43,30 +43,46 @@ $(document).ready(function() {
     $('h1').attr('class', thermostat.energyUsage());
   }
 
+  var city = $('#current-city').val();
+  var country = $('#current-country').val();
+
   function updateWeather() {
 
 
       $('#current-country').change(function() {
-      var country = $('#current-country').val();
+       country = $('#current-country').val();
 
       });
 
       $('#select-city').change(function() {
-        var city = $('#current-city').val();
+         city = $('#current-city').val();
+
       });
 
-    displayWeather(country, city);
+
+
+
+
+
   }
 
-    displayWeather('UK', 'London');
+    $("#submit").click(function(){
+      displayWeather();
+
+    });
+
+      displayWeather();
 
 
 
-    function displayWeather(country, city) {
+    function displayWeather() {
+      var city = $("#current-city").val();
+      var country = $("#current-country").val();
     $.getJSON('http://api.wunderground.com/api/12a2d3bf53a24799/conditions/q/'+ country +'/'+ city +'.json').done
       (function(json) {
         $('#api').text(json.current_observation.temp_c);
       });
+      $('#city').text(city);
   }
 
 

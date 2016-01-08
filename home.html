@@ -20,7 +20,7 @@
     <script type="text/javascript" src="Thermostat.js"></script>
     <script type="text/javascript" src='script.js'></script>
     <link type="text/css" rel="stylesheet" href="stylesheet.css">
-    <div>Temperaure in London: <span id="api"></span></div>
+    <div>Temperaure in <span id="city"></span>: <span id="api"></span></div>
 
     <section>
   <h2>Select a county</h2>
@@ -29,14 +29,18 @@
     <option value="IT">Italy</option>
     <option value="ES">Spain</option>
     <option value="FR">France</option>
+    <option value="NZ">New Zealand</option>
+
+
+
   </select>
 
   <section>
 <h2>Enter a city (e.g: London)</h2>
-<form id="select-city">
-  <input id="current-city" type="text" placeholder="Enter a city"></input>
-  <input type="submit"></input>
-</form>
+
+  <input id="current-city" type="text" value="London" placeholder="Enter a city">
+  <button id="submit">Submit</button>
+
 </section>
 
 </section>
